@@ -6,9 +6,9 @@ import json
 CITY_DATA = { 'chicago': 'chicago.csv', 
               'new york': 'new_york_city.csv', 
               'washington': 'washington.csv' }
-cities = ('chicago', 'new york', 'washington')
-months = ('all','january', 'february', 'march', 'april', 'may', 'june')
-days = ('all','monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
+CITIES = ('chicago', 'new york', 'washington')
+MONTHS = ('all','january', 'february', 'march', 'april', 'may', 'june')
+DAYS = ('all','monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
   
 
 def get_filters(): 
@@ -24,19 +24,19 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs 
     while True: 
         city=input('Which of these cities do you want to explore : Chicago, New York or Washington? \n> ').lower() 
-        if city in cities: 
+        if city in CITIES: 
             break       
 
     # TO DO: get user input for month (all, january, february, ... , june) 
     while True:
-        month = input('Now you have to enter a months from {} to get some months result or type \'all\' if you need all months data. \n>'.format(months)).lower()
-        if month in months:
+        month = input('Now you have to enter a month from {} to get some months result or type \'all\' if you need all months data. \n>'.format(MONTHS)).lower()
+        if month in MONTHS:
             break  
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
-        day = input('Now you have to choose any day in a week from {} or type \'all\' if you need the whole week data. \n> '.format(days)).lower()  
-        if day in days:
+        day = input('Now you have to choose any day in a week from {} or type \'all\' if you need the whole week data. \n> '.format(DAYS)).lower()  
+        if day in DAYS:
             break
 
     print('-'*40) 
@@ -66,7 +66,7 @@ def load_data(city, month, day):
 
     # filter by month if applicable 
     if month != 'all': 
-        month =  months.index(month) + 1 
+        month =  MONTHS.index(month) + 1 
         df = df[ df['month'] == month] 
 
     # filter by day of week if applicable 
@@ -86,8 +86,8 @@ def time_stats(df):
     # idxmax - Return index of first occurrence of maximum over requested axis. 
     # TO DO: display the most common month 
     most_common_month = df['month'].value_counts().idxmax() 
-    months_title=months[most_common_month-1] 
-    print('The most common month {}'.format(months_title)) 
+    MONTHS_title=MONTHS[most_common_month-1] 
+    print('The most common month {}'.format(MONTHS_title)) 
 
     # TO DO: display the most common day of week 
     most_common_day_of_week = df['day_of_week'].value_counts().idxmax() 
@@ -221,6 +221,7 @@ def main():
         trip_duration_stats(df)  
         user_stats(df)
         
+        # Display list of data from selected city, months and days
         display_data(df)
  
         restart = input('\nWould you like to restart? Enter yes or no.\n')  
