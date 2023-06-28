@@ -207,6 +207,10 @@ def display_data(df):
             else:
                 print("Empty or invalid JSON row: '{}'".format(row))
 
+# Main System flow
+# 1. User choose the city
+# 2. User choose the month interested
+# 3. User choose the day of the week to check
 def main():  
     while True:  
         city, month, day = get_filters()  
